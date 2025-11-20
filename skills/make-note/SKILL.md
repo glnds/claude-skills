@@ -3,12 +3,12 @@ name: make-note
 description: Create well-structured notes in Obsidian with intelligent tag suggestions. Use when the user asks to create a note, make a note, or save content to Obsidian. Scans existing vault for common tags and presents suggestions before creating the note in the Resources folder.
 license: MIT
 metadata:
-  version: 1.1
+  version: 1.2
 ---
 
 # Make Note
 
-Create structured notes in Obsidian's Resources folder with intelligent tag management based on
+Create or edit notes in Obsidian's Resources folder with intelligent tag management based on
 existing vault patterns.
 
 ## Workflow
@@ -25,15 +25,15 @@ Before creating any note, scan the vault to understand existing tag patterns:
 The MCP tool `obsidian_get_tags` returns a JSON with tag frequencies. Focus on tags that appear
 more than 3 times to identify genuine patterns rather than one-off tags.
 
-This an example of the JSON return:
+This is an example of the JSON return:
 
 ```json
 {
-  tags: {
-    #tag1: 24,
-    #tag2/subtagx: 37,
-    #tag3: 104,
-    #tag4: 62
+  "tags": {
+    "#tag1": 24,
+    "#tag2/subtagx": 37,
+    "#tag3": 104,
+    "#tag4": 62
   }
 }
 ```
@@ -45,8 +45,7 @@ Based on the note content and existing tag patterns:
 1. Analyze the note topic and content
 2. Match it against common tags from the vault
 3. Propose 3-5 relevant tags that fit the content
-4. Present tags to the user as a numbered list so that I can easily select tags by answering with
-   the tags's corresponding number.
+4. Present tags to the user as a numbered list for easy selection by number.
 5. Allow the user to confirm, modify, or add tags
 
 **Tag suggestion format:**
@@ -73,9 +72,9 @@ Wait for user confirmation before proceeding.
 
 Once tags are confirmed:
 
-1. Create the note in the Resources folder using the MCP Server `mcp-obsidian` tool
+1. Create or edit the note in the Resources folder using the MCP Server `mcp-obsidian` tool
    `obsidian_append_content`
-2. Include proper frontmatter with:
+2. Proper front matter MUST be included and MUST follow the following format:
    - `tags:` field formatted as list
    - `created:` field with current date in format `DD-MM-YYYY HH:MM`
 3. Add the note title as H1 heading with wiki-link format: `# [[Title]]`
@@ -83,9 +82,9 @@ Once tags are confirmed:
 5. Preserve any sections, formatting, or structure from the original content
 6. Add at the bottom of the note:
    - `## References` section with relevant external links (if any)
-   - `## Related Notes` section with wiki-links to other notes in the vault (if any)
+   - `## Related Notes` section with wiki-links to other notes in the vault (if any). DO NOT add dead links!
 
-**Frontmatter format:**
+**MANDATORY Frontmatter format:**
 
 ```yaml
 ---
