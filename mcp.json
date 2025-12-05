@@ -86,6 +86,12 @@
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR"
       }
+    },
+    "beads": {
+      "command": "uvx",
+      "args": [
+        "beads-mcp"
+      ]
     }
   }
 }
