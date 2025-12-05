@@ -23,7 +23,6 @@ project's `.mcp.json` and customize as needed.
 | awslabs.aws-iac-mcp-server | Infrastructure-as-code assistance |
 | awslabs.aws-serverless-mcp-server | Serverless AWS service guidance |
 | awslabs.dynamodb-mcp-server | DynamoDB schema and query assistance |
-| beads | Git-backed issue tracker for persistent agent memory |
 
 ### User Memory
 
