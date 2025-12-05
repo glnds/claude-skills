@@ -24,6 +24,13 @@ project's `.mcp.json` and customize as needed.
 | awslabs.aws-serverless-mcp-server | Serverless AWS service guidance |
 | awslabs.dynamodb-mcp-server | DynamoDB schema and query assistance |
 
+### Project Memory
+
+Tools that give AI coding agents persistent memory about your project:
+
+- [Beads](https://github.com/steveyegge/beads): Git-backed distributed issue tracker for AI
+  agents. Maintains task dependencies and work state across sessions.
+
 ### User Memory
 
 The `user_memory/CLAUDE.md` file contains user-level instructions that apply across all projects.
