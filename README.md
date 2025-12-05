@@ -24,6 +24,20 @@ project's `.mcp.json` and customize as needed.
 | awslabs.aws-serverless-mcp-server | Serverless AWS service guidance |
 | awslabs.dynamodb-mcp-server | DynamoDB schema and query assistance |
 
+### Plugins
+
+Plugins extend Claude Code with commands, agents, skills, and hooks.
+
+**Recommended for frontend projects:**
+
+```bash
+/plugin marketplace add anthropics/claude-code
+/plugin install frontend-design@claude-code
+```
+
+The frontend-design plugin auto-invokes for UI work, generating production-grade interfaces
+with bold design choices instead of generic AI aesthetics.
+
 ### Project Memory
 
 Tools that give AI coding agents persistent memory about your project:
