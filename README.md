@@ -38,6 +38,25 @@ Plugins extend Claude Code with commands, agents, skills, and hooks.
 The frontend-design plugin auto-invokes for UI work, generating production-grade interfaces
 with bold design choices instead of generic AI aesthetics.
 
+### GitHub Integration
+
+Claude Code integrates with GitHub Actions for automated PR reviews and issue analysis.
+
+**Setup:**
+
+```bash
+/install-github-app
+```
+
+Installs the Claude GitHub app, configures repository secrets (`ANTHROPIC_API_KEY`), and sets
+up GitHub Actions workflows.
+
+**Review flow:**
+
+Mention `@claude` in PRs or issues with requests like "review my code changes" or "check for
+security issues". Claude respects your repository's `CLAUDE.md` guidelines and existing code
+patterns for tailored reviews.
+
 ### Project Memory
 
 Tools that give AI coding agents persistent memory about your project:
