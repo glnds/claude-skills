@@ -1,150 +1,95 @@
-# Claude Skills
+# Claude Config
 
-Custom skills that extend Claude Code's functionality through structured workflows and integrations.
+Personal Claude Code configuration: MCP server templates, user instructions, and custom skills.
 
-## What are Skills?
+## Repository Contents
 
-Skills are capabilities defined in markdown files that Claude Code can invoke
-to perform specialized tasks. Each skill contains:
+### MCP Configuration Template
 
-- **Frontmatter metadata**: Name, description, version, license
-- **Workflow instructions**: Step-by-step execution logic
-- **Integration patterns**: MCP server tools, user interactions
+The `mcp.json` file provides a starting template for MCP server configuration. Copy to your
+project's `.mcp.json` and customize as needed.
 
-## Available Skills
+**Included servers:**
 
-### make-note
+| Server | Purpose |
+|--------|---------|
+| chrome-devtools | Browser automation via Chrome DevTools |
+| playwright | Web testing and automation |
+| context7 | Code snippet and documentation lookups |
+| serena | IDE assistant integration |
+| awslabs.aws-documentation-mcp-server | AWS documentation search and lookup |
+| iam-policy-autopilot | IAM policy generation assistance |
+| awslabs.aws-api-mcp-server | AWS CLI command execution |
+| awslabs.aws-iac-mcp-server | Infrastructure-as-code assistance |
+| awslabs.aws-serverless-mcp-server | Serverless AWS service guidance |
+| awslabs.dynamodb-mcp-server | DynamoDB schema and query assistance |
 
-**Version:** 1.2
-**License:** MIT
+### User Memory
 
-Creates structured notes in Obsidian with intelligent tag suggestions based on existing vault patterns.
+The `user_memory/CLAUDE.md` file contains user-level instructions that apply across all projects.
+Copy to `~/.claude/CLAUDE.md` for global application.
 
-**Invocation:** "create a note", "make a note", "save content to Obsidian"
+**Key directives:**
 
-**Key Features:**
+- Conciseness over grammar in all interactions
+- Clarify before implementing (never assume)
+- Test-driven development (red-green-refactor)
+- GitHub issue integration
+- Markdown linting with markdownlint-cli2
 
-- Analyzes existing vault to identify common tag patterns
-- Suggests 3-5 relevant tags based on note content
-- Waits for user confirmation before creating note
-- Creates notes in Resources folder with proper frontmatter
-- Supports hierarchical tags (e.g., `ai/code-agent`, `dpg/strategy`)
+### Skills
 
-**MCP Integration:** `mcp-obsidian` (tag analysis, note creation)
+Skills extend Claude Code with structured workflows. Each skill contains frontmatter metadata,
+step-by-step instructions, and MCP integrations.
 
----
+#### make-note (v1.2)
 
-### sparring
+Creates Obsidian notes with intelligent tag suggestions from existing vault patterns.
 
-**Version:** 1.0
-**License:** MIT
+**Trigger:** "create a note", "make a note", "save to Obsidian"
 
-Critical thinking partner for technical concepts and strategy development. Researches your Obsidian notes to understand context, identifies gaps and assumptions, then provides constructive challenge.
+#### sparring (v1.0)
 
-**Invocation:** "let's spar on...", "help me think through...", "challenge my thinking on..."
+Critical thinking partner for technical concepts. Researches Obsidian notes for context,
+identifies gaps and assumptions, provides constructive challenge.
 
-**Key Features:**
+**Trigger:** "let's spar on...", "challenge my thinking on..."
 
-- Searches Obsidian vault for relevant past thinking and decisions
-- Consults AWS documentation for technical accuracy (when applicable)
-- Identifies gaps, questions assumptions, surfaces contradictions
-- Connects ideas across your knowledge base
-- Provides direct, honest feedback matching your communication style
+#### text-enhancer (v1.0)
 
-**MCP Integration:** `mcp-obsidian` (context research), `aws-documentation` (technical validation)
+Enhances professional/technical text with grammar, clarity, and factual verification while
+preserving authentic style.
 
----
+**Trigger:** "enhance [text]", "polish [text]"
 
-### text-enhancer
+#### verbalized-sampling (v1.0)
 
-**Version:** 1.0
-**License:** MIT
+Prompt engineering technique to overcome LLM mode collapse by generating multiple responses
+with probability distributions.
 
-Enhances professional and technical text with grammar correction, clarity improvements, and factual verification while preserving your authentic style.
+**Trigger:** "use verbalized sampling", "show multiple responses with probabilities"
 
-**Invocation:** "enhance [text]", "polish [text]"
+#### zellij-config (v1.3)
 
-**Key Features:**
+Zellij terminal multiplexer configuration: layouts, themes, keybindings, plugins.
+Config location: `~/dotfiles/.config/zellij/`
 
-- Corrects grammar and improves vocabulary
-- Enhances clarity and flow while maintaining conciseness
-- Verifies technical accuracy (especially AWS services)
-- Preserves authentic voice and style
-- Never uses em dashes (prefers colons for natural flow)
-- Searches Obsidian for related context and consistency
-
-**MCP Integration:** `mcp-obsidian` (related content), `aws-documentation` (technical verification)
-
----
-
-### verbalized-sampling
-
-**Version:** 1.0
-**License:** MIT
-
-Prompt engineering technique to overcome mode collapse in LLM responses by generating multiple answers with associated probabilities.
-
-**Invocation:** "use verbalized sampling", "show me multiple responses with probabilities"
-
-**Key Features:**
-
-- Generates 5-10 alternative responses with probability distributions
-- Explores beyond top-ranked answers to discover unexpected solutions
-- Supports filtering by probability ranges (high, mid, low, tail distribution)
-- Useful for creative tasks, brainstorming, and complex decision-making
-- Training-free technique compatible with all major LLMs
-
-**MCP Integration:** None (pure prompting technique)
-
----
-
-### zellij-config
-
-**Version:** 1.3
-**License:** MIT
-
-Comprehensive Zellij terminal multiplexer configuration management. Handles config.kdl files, layouts, themes, keybindings, plugins, and workflow automation.
-
-**Invocation:** "configure zellij", "create a zellij layout", "customize zellij theme"
-
-**Key Features:**
-
-- Creates and modifies config.kdl files
-- Builds layouts with command panes, tabs, and templates
-- Customizes themes and keybindings
-- Sets up plugins and workspace automation
-- Works with configuration in `~/dotfiles/.config/zellij/`
-- Includes bundled reference documentation for KDL syntax
-
-**MCP Integration:** None (file manipulation only)
+**Trigger:** "configure zellij", "create a zellij layout"
 
 ## Repository Structure
 
 ```text
-claude-skills/
-├── CLAUDE.md              # Guidance for Claude Code
+claude-config/
+├── mcp.json               # MCP server configuration template
+├── CLAUDE.md              # Repo-level Claude instructions
 ├── README.md              # This file
-├── LICENSE
-├── user_memory/           # User-specific Claude instructions
-│   └── CLAUDE.md
+├── user_memory/
+│   └── CLAUDE.md          # User-level instructions (copy to ~/.claude/)
 └── skills/
     └── [skill-name]/
-        ├── SKILL.md       # Skill definition with frontmatter and workflow
-        └── references/    # Optional: Supporting documentation
-            └── *.md
+        ├── SKILL.md       # Skill definition
+        └── references/    # Optional supporting docs
 ```
-
-## Creating Skills
-
-Each skill requires:
-
-1. Directory named after skill (lowercase, hyphenated)
-2. `SKILL.md` with YAML frontmatter and workflow
-3. Clear trigger phrases in description
-4. User confirmation points for actions
-5. MCP tool integration (if external systems involved)
-
-See [CLAUDE.md](CLAUDE.md) for detailed guidelines.
 
 ## License
 
