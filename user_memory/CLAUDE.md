@@ -40,6 +40,23 @@ issue status and add comments when making meaningful progress.
 Maintain consistency with existing code style and architecture patterns. Keep changes focused on the
 task at hand. Write clear commit messages that explain why changes were made, not just what changed.
 
+### AWS API MCP Usage Policy
+
+**ONLY Allowed (read-only):**
+
+- `describe-*`, `list-*`, `get-*` commands
+- Status checks, log queries, metric reads
+
+**Forbidden:**
+
+- Any mutating operation (`create-*`, `update-*`, `delete-*`, `put-*`, `modify-*`, `start-*`,
+  `stop-*`, `invoke-*`, etc.)
+
+**Infrastructure changes MUST use:**
+
+- **IaC:** Terraform, AWS CDK, CloudFormation, or SAM
+- **CI/CD:** GitHub Actions, CodePipeline/CodeBuild
+
 ### Markdown Linting with markdownlint-cli2
 
 When creating or editing Markdown files, always ensure compliance with the configured markdownlint rules
